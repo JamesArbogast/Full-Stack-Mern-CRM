@@ -27,8 +27,8 @@ const NewProduct = (props) => {
     };
 
     return (
-        <div className="w-50 p-4 rounded mx-auto shadow">
-            <h3 className="text-center">New Product</h3>
+        <div className="App">
+            <h3 className="">New Product</h3>
 
             <form
                 onSubmit={(e) => {

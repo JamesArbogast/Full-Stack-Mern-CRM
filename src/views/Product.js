@@ -21,12 +21,12 @@ const Product = (props) => {
         }
 
     return (
-        <div>
-            <h4></h4>
-            <div key={props.id} className="shadow mb-4 rounded border p-4">
-                <h4>{props.title}</h4>
-                <p>{props.price}</p>
-                <p>{props.description}</p>
+        <div className="App">
+            <h4>Product: </h4>
+            <div key={product.id} className="shadow mb-4 rounded border p-4">
+                <h4>{product.title}</h4>
+                <p>{product.price}</p>
+                <p>{product.description}</p>
             </div>
         </div>
     );
