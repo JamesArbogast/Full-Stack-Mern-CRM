@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { Link, Redirect, Router } from "@reach/router";
+
+import NotFound from "./views/NotFound";
+import Products from "./views/Products";
+import Product from "./views/Product";
+import NewProduct from "./views/NewProduct";
+import EditProduct from "./views/EditProduct";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top justify-content-center mb-4">
+        <h1 className="navbar-brand mb-0">Products</h1>
+        <div className="navbar-nav justify-content-between">
+          <Link
+            to="/products"
+            className="btn btn-sm btn-outline-primary mx-1"
+          >
+            All Products
+          </Link>
+          <Link
+            to="/products/new"
+            className="btn btn-sm btn-outline-primary mx-1"
+          >
+            New Product
+          </Link>
+        </div>
+      </nav>
+      <Router>
+        <Products path="/products" />
+        <Product path="/products/:id" />
+        <EditProduct path="/products/:id/edit" />
+        <NewProduct path="/products/new" />
+        <Redirect from="/" to="/products" noThrow="true" />
+        <NotFound default />
+      </Router>
     </div>
   );
 }
