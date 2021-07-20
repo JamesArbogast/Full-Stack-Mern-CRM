@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { navigate} from "@reach/router";
 import axios from "axios";
 
 const Product = (props) => {
@@ -14,11 +15,23 @@ const Product = (props) => {
             .catch((err) => {
                 console.log(err);
             });
-        }, [props._id]);
+        }, [props.id]);
 
-        if(product == null) {
-            return "Loading..."
-        }
+    const handleDelete = (id) => {
+        axios
+            .delete("http://localhost:5000/api/products/" + id)
+            .then((res) => {
+                console.log(res);
+                navigate("/products");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    if(product == null) {
+        return "Loading..."
+    }
 
     return (
         <div className="App">
@@ -27,6 +40,26 @@ const Product = (props) => {
                 <h4>{product.title}</h4>
                 <p>{product.price}</p>
                 <p>{product.description}</p>
+            </div>
+            <div className="mt-3">
+                <button
+                    onClick={(e) => {
+                        handleDelete(product._id);
+                    }}
+                    className="btn btn-sm btn-outline-danger"
+                    >
+                    Delete
+                </button>
+            </div>
+            <div className="mt-3">
+                <button
+                    onClick={(e) => {
+                        navigate("/products/" + product._id + "/edit");
+                    }}
+                    className="btn btn-sm btn-outline-danger"
+                    >
+                    Edit
+                </button>
             </div>
         </div>
     );
